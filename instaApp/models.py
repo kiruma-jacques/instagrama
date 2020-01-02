@@ -12,4 +12,6 @@ class Image(models.Model):
     iname = models.CharField(max_length=30)
     icaption = models.TextField(blank=True)
     iprofile = models.ForeignKey(Profile)
-    
+
+class Comments(models.Model):
+    comment = models.TextField(blank=True)
