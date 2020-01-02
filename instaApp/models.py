@@ -15,3 +15,4 @@ class Image(models.Model):
 
 class Comments(models.Model):
     comment = models.TextField(blank=True)
+    image = models.ForeignKey(Image)
