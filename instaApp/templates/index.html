@@ -2,7 +2,15 @@
 {% block content %}
 {{block.super}}
 <h1>pip</h1>
-<input
-  type="hidden"
-  role="uploadcare-uploader" />
+  <form class="" action="{% url 'homePage' %}" method="post">
+    {% csrf_token %}
+    {{ upload_form }}
+    <input type="submit" name="" value="Upload">
+  </form>
+
+
+  {% for post in posts %}
+  <img src="{{post.image.cdn_url}}" alt="">
+  <p>{{post.icaption}}</p>
+  {% endfor %}
 {% endblock %}

@@ -11,9 +11,9 @@ class Image(models.Model):
     image = ImageField()
     iname = models.CharField(max_length=30)
     icaption = models.TextField(blank=True)
-    iprofile = models.ForeignKey(Profile)
+    # iprofile = models.ForeignKey(Profile)
     ilikes = models.IntegerField(default=0)
-    
+
 class Comments(models.Model):
     comment = models.TextField(blank=True)
     image = models.ForeignKey(Image)
