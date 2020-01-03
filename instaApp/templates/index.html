@@ -1,2 +1,8 @@
 {% extends 'base.html' %}
+{% block content %}
+{{block.super}}
 <h1>pip</h1>
+<input
+  type="hidden"
+  role="uploadcare-uploader" />
+{% endblock %}

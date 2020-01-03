@@ -1,21 +1,23 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
     <title>Insta</title>
-    
     {% block styles %}
     <link rel="stylesheet" href="{% static 'css/styles.css'%}">
     {% endblock %}
-
+    {% block scripts %}
+    <script>
+    UPLOADCARE_PUBLIC_KEY = 'c899fca471ff5116f69d';
+    </script>
+    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    {% endblock %}
   </head>
   <body>
     {% block content %}
     {% endblock %}
-    {% block scripts %}
-
-    <script src="{% static 'js/scripts.js' %}"></script>
-    {% endblock %}
-
   </body>
 </html>
