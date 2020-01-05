@@ -144,3 +144,10 @@ UPLOADCARE = {
     'pub_key':'c899fca471ff5116f69d',
     'secret': config('SECRET'),
 }
+
+# email configurations
+EMAIL_USE_TLS=config('EMAIL_USE_TLS')
+EMAIL_HOST=config('EMAIL_HOST')
+EMAIL_PORT=config('EMAIL_PORT')
+EMAIL_HOST_USER=config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD=config('EMAIL_HOST_PASSWORD')

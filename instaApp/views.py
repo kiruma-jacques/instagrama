@@ -3,8 +3,10 @@ from .forms import UploadForm
 from .models import Image
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+
 def index(request):
     posts=Image.objects.all()[::-1]
     if request.method == "POST":
