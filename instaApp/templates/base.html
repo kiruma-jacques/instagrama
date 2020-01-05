@@ -1,3 +1,4 @@
+{% load bootstrap4 %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -6,18 +7,21 @@
     <meta charset="utf-8">
     <title>Insta</title>
     {% block styles %}
-    {% bootstrap_css %}
-    <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+      {% bootstrap_css %}
+      <link rel="stylesheet" href="{% static 'css/styles.css'%}">
+      
     {% endblock %}
+
     {% block scripts %}
-    <script>
-    UPLOADCARE_PUBLIC_KEY = 'c899fca471ff5116f69d';
-    </script>
-    <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
-    <script src="{% static 'js/scripts.js' %}"></script>
+      <script>
+      UPLOADCARE_PUBLIC_KEY = 'c899fca471ff5116f69d';
+      </script>
+      <script src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script>
+      <script src="{% static 'js/scripts.js' %}"></script>
     {% endblock %}
   </head>
   <body>
+    {% include 'navbar.html' %}
     {% block content %}
     {% endblock %}
   </body>

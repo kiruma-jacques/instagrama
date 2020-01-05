@@ -1,16 +1,49 @@
 {% extends 'base.html' %}
+
 {% block content %}
 {{block.super}}
-<h1>pip</h1>
-  <form class="" action="{% url 'homePage' %}" method="post">
-    {% csrf_token %}
-    {{ upload_form }}
-    <input type="submit" name="" value="Upload">
-  </form>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#uploadForm" >
+Upload photo
+</button>
 
+<!-- Modal -->
+<div class="modal fade" id="uploadForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form class="" action="{% url 'homePage' %}" method="post">
+        {% csrf_token %}
+        {{ upload_form }}
+        <input class="btn btn-outline-success" type="submit" name="" value="Upload">
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
 
-  {% for post in posts %}
-  <img src="{{post.image.cdn_url}}" alt="">
-  <p>{{post.icaption}}</p>
-  {% endfor %}
+    </div>
+    <div class="col-md-6">
+      {% for post in posts %}
+      <img class="img-thumbnail" src="{{post.image.cdn_url}}" alt="">
+      <p>{{post.icaption}}</p>
+      {% endfor %}
+    </div>
+    <div class="col-md-3">
+
+    </div>
+
+  </div>
+
+</div>
+
 {% endblock %}
