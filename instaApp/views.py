@@ -5,9 +5,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 ##################from .email import send_welcome_email
 
-
 # Create your views here.
-
+@login_required(login_url='/accounts/login/')
 def index(request):
     posts=Image.objects.all()[::-1]
     if request.method == "POST":
