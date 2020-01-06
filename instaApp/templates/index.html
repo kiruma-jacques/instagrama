@@ -16,7 +16,7 @@
     <div class="modal-body">
       <form class="form-group" action="{% url 'homePage' %}" method="post">
         {% csrf_token %}
-        {{ upload_form }}
+        {% bootstrap_form upload_form %}
         <input class="btn btn-outline-success" type="submit" name="" value="Upload">
       </form>
     </div>
@@ -31,7 +31,7 @@
     <div class="col-md-6">
       {% for post in posts %}
       <img class="img-thumbnail" src="{{post.image.cdn_url}}" alt="">
-      <p>{{post.icaption}}</p>
+      <p>{{post.caption}}</p>
       {% endfor %}
     </div>
     <div class="col-md-3">

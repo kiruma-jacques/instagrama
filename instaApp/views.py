@@ -13,6 +13,7 @@ def index(request):
         upload_form = UploadForm(request.POST, request.FILES)
         if upload_form.is_valid():
             upload = upload_form.save(commit=False)
+            upload.user = request.user
             upload.save()
             HttpResponseRedirect('homePage')
     else:

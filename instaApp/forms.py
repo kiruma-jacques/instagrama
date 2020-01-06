@@ -4,5 +4,4 @@ from .models import Image
 class UploadForm(forms.ModelForm):
     class Meta:
         model = Image
-        exclude = ['iprofile', 'ilikes']
-        
+        exclude = ['profile', 'likes', 'user']
