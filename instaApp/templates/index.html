@@ -3,11 +3,6 @@
 
 {% block content %}
 {{block.super}}
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#uploadForm" >
-Upload photo
-</button>
-
 <!-- Modal -->
 <div class="modal fade" id="uploadForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog" role="document">
@@ -19,7 +14,7 @@ Upload photo
       </button>
     </div>
     <div class="modal-body">
-      <form class="" action="{% url 'homePage' %}" method="post">
+      <form class="form-group" action="{% url 'homePage' %}" method="post">
         {% csrf_token %}
         {{ upload_form }}
         <input class="btn btn-outline-success" type="submit" name="" value="Upload">
