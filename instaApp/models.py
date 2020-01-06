@@ -11,7 +11,7 @@ class Image(models.Model):
     image = ImageField()
     name = models.CharField(max_length=30)
     caption = models.TextField(blank=True)
-    profile = models.ForeignKey(Profile)
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     likes = models.IntegerField(default=0)
 
 class Comments(models.Model):
