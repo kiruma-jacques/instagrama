@@ -3,9 +3,37 @@
 
 {% block content %}
 {{ block.super }}
+<!-- My Modals -->
+<div class="modal fade" id="updateForm" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">Update you profile.</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form class="form-group" action="{% url 'userProfile' %}" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input class="btn btn-outline-success" type="submit" name="" value="Upload">
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
 <div class="container">
-  <div class="row">
-    
+    <img src="{{user.profile.avatar.cdn_url}}" alt="avatar">
+    <p>{{user.username}}</p>
+
+    {% if user.profile.bio %}
+    <p>{{user.profile.bio}}</p>
+    {% else %}
+    <p>No bio.</p>
+    {% endif %}
+    <button type="button" name="button" data-toggle="modal" data-target="#updateForm" >Edit Profile</button>
   </div>
 </div>
 {% endblock %}

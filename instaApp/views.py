@@ -14,7 +14,7 @@ def index(request,**kwargs):
     if request.method == "POST":
         if upload_form.is_valid():
             upload = upload_form.save(commit=False)
-            upload.user = request.user.profile
+            upload.user = request.user
             upload.save()
             return HttpResponseRedirect(request.path_info)
     else:
@@ -28,16 +28,16 @@ def index(request,**kwargs):
 
 def profile(request):
     current_profile=Profile.objects.exclude(id=request.user.id)
-    profile_update=ProfileUpdateForm(request.POST)
-    users_posts=Image.objects.filter(request.user.id)
+    profile_update=ProfileUpdateForm(request.POST, request.FILES)
+    users_posts=Image.objects.filter(id=request.user.id)[::-1]
     if request.method == "POST":
         if profile_update.is_valid():
             updated = profile_update.save(commit=False)
-            updated.user = request.user.profile
+            updated.user = request.user
             updated.save()
             return HttpResponseRedirect(request.path_info)
     else:
-        profile_update =ProfileUpdateForm()
+        profile_update=ProfileUpdateForm()
     context={
         'users_posts':users_posts,
         'form':profile_update,
