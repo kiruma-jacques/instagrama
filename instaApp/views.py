@@ -28,9 +28,10 @@ def index(request,**kwargs):
 
 def profile(request):
     current_profile=Profile.objects.exclude(id=request.user.id)
-    profile_update=ProfileUpdateForm(request.POST, request.FILES)
-    users_posts=Image.objects.filter(id=request.user.id)[::-1]
+    users_posts=Image.objects.filter(user=request.user)[::-1]
     if request.method == "POST":
+        profile_update=ProfileUpdateForm(request.POST, request.FILES)
+        # import pdb; pdb.set_trace()
         if profile_update.is_valid():
             updated = profile_update.save(commit=False)
             updated.user = request.user
@@ -40,7 +41,7 @@ def profile(request):
         profile_update=ProfileUpdateForm()
     context={
         'users_posts':users_posts,
-        'form':profile_update,
+        'update_form':profile_update,
         'user':current_profile,
     }
-    return render(request, 'profile.html', locals())
+    return render(request, 'profile.html', context)
