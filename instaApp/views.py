@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import UploadForm
+from .forms import UploadForm,ProfileUpdateForm
 from .models import Image, Profile, Comments
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
@@ -27,4 +27,20 @@ def index(request,**kwargs):
     return render (request, 'index.html',locals())
 
 def profile(request):
-    pass
+    current_profile=Profile.objects.exclude(id=request.user.id)
+    profile_update=ProfileUpdateForm(request.POST)
+    users_posts=Image.objects.filter(request.user.id)
+    if request.method == "POST":
+        if profile_update.is_valid():
+            updated = profile_update.save(commit=False)
+            updated.user = request.user.profile
+            updated.save()
+            return HttpResponseRedirect(request.path_info)
+    else:
+        profile_update =ProfileUpdateForm()
+    context={
+        'users_posts':users_posts,
+        'form':profile_update,
+        'user':current_profile,
+    }
+    return render(request, 'profile.html', locals())
