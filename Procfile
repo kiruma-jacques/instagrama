@@ -1,1 +1,1 @@
-web: gunircorn InstaProject.wsgi --log-file -
+web: gunicorn instaProject.wsgi --log-file -
