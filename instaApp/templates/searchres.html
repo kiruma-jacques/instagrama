@@ -2,6 +2,51 @@
 {% load bootstrap4 %}
 
 {% block content %}
-<h1>{{message}}</h1>
-<p>{{user.username}}</p>
+{% for user in user%}
+  <div class="container">
+    <img class="rounded-circle" src="{{user.profile.avatar.cdn_url}}" alt="avatar" height="100" width="100">
+    <p><b>{{user.username}}</b></p>
+    <p><i>{{ user.profile.bio }}</i></p>
+    <hr>
+    {% for post in posts %}
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3 col-sm-3">
+
+        </div>
+        <div class="col-md-6 col-sm-6 myimages">
+          <div>
+            <img class="img-thumbnail" src="{{post.image.cdn_url}}" alt="users posts" height="600" width="600">
+            <p>{{post.caption}}</p>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3">
+
+        </div>
+    {% endfor %}
+  </div>
+{%endfor%}
 {% endblock %}
+
+
+<!-- {<div class="container">
+    {% if user.profile.avatar %}
+    <img class="rounded-circle" src="{{user.profile.avatar.cdn_url}}" alt="avatar" height="100" width="100">
+    {% else %}
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwuFjKKPiB59OHKPCvIydOhg7vd16ODbzqFyvmC4S-YSdiyW3d&s" alt="avatar_alt">
+    {% endif %}
+
+    <p><b>{{ user.username }}</b></p>
+
+    {% if user.profile.bio %}
+
+    {% else %}
+    <p>Edit profile to put a bio.</p>
+    {% endif %}
+    <button class="btn btn-light" type="button" name="button" data-toggle="modal" data-target="#updateForm" >Edit Profile</button>
+    <hr>
+
+        </div>
+      </div>
+    </div>
+} -->
