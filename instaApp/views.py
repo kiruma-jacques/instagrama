@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .forms import UploadForm,ProfileUpdateForm
 from .models import Image, Profile, Comments
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 ##################from .email import send_welcome_email
@@ -51,10 +51,16 @@ def profile(request):
 def search_user(request):
     if request.method == "GET":
         search_term = request.GET.get('search')
-        searched_user = User.objects.filter(username=search_term)
         message = '{}'.format(search_term)
+        try:
+            searched_user = User.objects.filter(username=search_term)
+            searched_posts = Image.objects.filter(user=searched_user)
+        except DoesNotExist:
+            raise Http404()
+            return HttpResponseRedirect('homePage')
     context={
         'user':searched_user,
         'message':message
     }
+    
     return render(request, 'searchres.html', locals())
