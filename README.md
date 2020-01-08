@@ -54,7 +54,7 @@ Fork the repo
 * Push your changes so we can have a view!
 
 ## Known Bugs
-The applications likes and followers are not working
+The applications comments and followers are not working
 One can view all images for all users in the app
 
 ### LICENSE

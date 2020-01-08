@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .forms import UploadForm,ProfileUpdateForm
+from .forms import UploadForm,ProfileUpdateForm, CommentForm
 from .models import Image, Profile, Comments
 from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.decorators import login_required
@@ -12,18 +12,21 @@ def index(request,**kwargs):
     posts=Image.objects.all()[::-1]
     current_profile=Profile.objects.exclude(id=request.user.id)
     upload_form = UploadForm(request.POST, request.FILES)
-    if request.method == "POST":
-        if upload_form.is_valid():
-            upload = upload_form.save(commit=False)
-            upload.user = request.user
-            upload.save()
-            return HttpResponseRedirect(request.path_info)
+    comment_form = CommentForm(request.POST, request.FILES)
+    if upload_form.is_valid():
+        upload = upload_form.save(commit=False)
+        upload.user = request.user
+        upload.save()
+        return HttpResponseRedirect(request.path_info)
     else:
         upload_form = UploadForm()
+        comment_form = CommentForm()
+
     context ={
         'posts':posts,
-        'form': upload_form,
-        'user': current_profile,
+        'form':upload_form,
+        'cform':comment_form,
+        'user':current_profile,
     }
     return render (request, 'index.html',locals())
 
