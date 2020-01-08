@@ -26,19 +26,19 @@
 
 <div class="container">
     {% if user.profile.avatar %}
-    <img src="{{user.profile.avatar.cdn_url}}" alt="avatar">
+    <img class="rounded-circle" src="{{user.profile.avatar.cdn_url}}" alt="avatar" height="100" width="100">
     {% else %}
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwuFjKKPiB59OHKPCvIydOhg7vd16ODbzqFyvmC4S-YSdiyW3d&s" alt="avatar_alt">
     {% endif %}
 
-    <p>{{ user.username }}</p>
+    <p><b>{{ user.username }}</b></p>
 
     {% if user.profile.bio %}
     <p>{{ user.profile.bio }}</p>
     {% else %}
     <p>Edit profile to put a bio.</p>
     {% endif %}
-    <button class="btn" type="button" name="button" data-toggle="modal" data-target="#updateForm" >Edit Profile</button>
+    <button class="btn btn-light" type="button" name="button" data-toggle="modal" data-target="#updateForm" >Edit Profile</button>
     <hr>
     {% for post in users_posts %}
     <div class="container">
@@ -46,9 +46,11 @@
         <div class="col-md-3 col-sm-3">
 
         </div>
-        <div class="col-md-6 col-sm-6 my-images">
-          <img class="img-thumbnail" src="{{post.image.cdn_url}}" alt="">
-          <p>{{post.caption}}</p>
+        <div class="col-md-6 col-sm-6 myimages">
+          <div>
+            <img class="img-thumbnail" src="{{post.image.cdn_url}}" alt="users posts" height="600" width="600">
+            <p>{{post.caption}}</p>
+          </div>
         </div>
         <div class="col-md-3 col-sm-3">
 

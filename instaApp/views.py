@@ -47,3 +47,14 @@ def profile(request):
         'form':update_form,
     }
     return render(request, 'profile.html', locals())
+
+def search_user(request):
+    if request.method == "GET":
+        search_term = request.GET.get('search')
+        searched_user = User.objects.filter(username=search_term)
+        message = '{}'.format(search_term)
+    context={
+        'user':searched_user,
+        'message':message
+    }
+    return render(request, 'searchres.html', locals())

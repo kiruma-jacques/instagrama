@@ -30,9 +30,9 @@
     </div>
     <div class="col-md-6 col-sm-6">
       {% for post in posts %}
-      <img src="{{user.profile.avatar.cdn_url}}" alt="avatar">
-      <p>{{ user.username }}</p>
-      <img class="img-thumbnail" src="{{post.image.cdn_url}}" alt="">
+      <img class="rounded-circle" src="{{user.profile.avatar.cdn_url}}" alt="avatar" height="50" width="50">
+      <p><b>{{ user.username }}</b></p>
+      <img class="img-thumbnail" src="{{post.image.cdn_url}}" alt="" height="600" width="600">
       <p>{{post.caption}}</p>
       {% endfor %}
     </div>
