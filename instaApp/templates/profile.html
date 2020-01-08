@@ -16,7 +16,7 @@
     <div class="modal-body">
       <form class="form-group" action="{% url 'userProfile' %}" method="post">
         {% csrf_token %}
-        {{ update_form }}
+        {% bootstrap_form update_form %}
         <input class="btn btn-outline-success" type="submit" name="" value="Update">
       </form>
     </div>
@@ -31,14 +31,13 @@
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwuFjKKPiB59OHKPCvIydOhg7vd16ODbzqFyvmC4S-YSdiyW3d&s" alt="avatar_alt">
     {% endif %}
 
-    <p>{{request.user.username}}</p>
+    <p>{{ user.username }}</p>
 
-    {% if user.bio %}
-    <p>{{ user.bio }}</p>
+    {% if user.profile.bio %}
+    <p>{{ user.profile.bio }}</p>
     {% else %}
-    <p>No bio.</p>
+    <p>Edit profile to put a bio.</p>
     {% endif %}
-
     <button class="btn" type="button" name="button" data-toggle="modal" data-target="#updateForm" >Edit Profile</button>
     <hr>
     {% for post in users_posts %}
@@ -47,7 +46,7 @@
         <div class="col-md-3 col-sm-3">
 
         </div>
-        <div class="col-md-6 col-sm-6">
+        <div class="col-md-6 col-sm-6 my-images">
           <img class="img-thumbnail" src="{{post.image.cdn_url}}" alt="">
           <p>{{post.caption}}</p>
         </div>
