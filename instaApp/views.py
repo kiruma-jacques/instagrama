@@ -25,7 +25,7 @@ def index(request,**kwargs):
     context ={
         'posts':posts,
         'form':upload_form,
-        'cform':comment_form,
+        'cform': comment_form,
         'user':current_profile,
     }
     return render (request, 'index.html',locals())
