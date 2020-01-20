@@ -4,10 +4,9 @@ from .models import Image, Profile, Comments
 from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-##################from .email import send_welcome_email
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
-# @login_required(login_url='/accounts/login/')
+@login_required(login_url='/accounts/login/')
 def index(request,**kwargs):
     posts=Image.objects.all()[::-1]
     current_profile=Profile.objects.exclude(id=request.user.id)
@@ -21,7 +20,6 @@ def index(request,**kwargs):
     else:
         upload_form = UploadForm()
         comment_form = CommentForm()
-
     context ={
         'posts':posts,
         'form':upload_form,
@@ -30,6 +28,7 @@ def index(request,**kwargs):
     }
     return render (request, 'index.html',locals())
 
+@login_required(login_url='/accounts/login/')
 def profile(request):
     current_user = request.user
     current_profile = Profile.objects.get(user=request.user)
@@ -51,12 +50,12 @@ def profile(request):
     }
     return render(request, 'profile.html', locals())
 
+@login_required(login_url='/accounts/login/')
 def search_user(request):
     if request.method == "GET":
         search_term = request.GET.get('search')
         message = '{}'.format(search_term)
         # searched_user = User.objects.filter(username=search_term).all()
-
         try:
             searched_user = User.objects.filter(username=search_term)
             searched_posts = Image.objects.filter(user=searched_user)[::-1]
