@@ -4,9 +4,9 @@ from .models import Image, Profile, Comments
 from django.http import HttpResponseRedirect, Http404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required(login_url='/accounts/login/')
 def index(request,**kwargs):
     posts=Image.objects.all()[::-1]
     current_profile=Profile.objects.exclude(id=request.user.id)
@@ -16,7 +16,7 @@ def index(request,**kwargs):
         upload = upload_form.save(commit=False)
         upload.user = request.user
         upload.save()
-        return redirect('homePage')
+        return HttpResponseRedirect(request.path_info)
     else:
         upload_form = UploadForm()
         comment_form = CommentForm()
@@ -51,7 +51,6 @@ def profile(request):
     }
     return render(request, 'profile.html', locals())
 
-@login_required(login_url='/accounts/login/')
 def search_user(request):
     if request.method == "GET":
         search_term = request.GET.get('search')
