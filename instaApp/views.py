@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 # Create your views here.
-@login_required(login_url='/accounts/login/')
+
 def index(request,**kwargs):
     posts=Image.objects.all()[::-1]
     current_profile=Profile.objects.exclude(id=request.user.id)
@@ -16,19 +16,20 @@ def index(request,**kwargs):
         upload = upload_form.save(commit=False)
         upload.user = request.user
         upload.save()
-        return HttpResponseRedirect(request.path_info)
+        return redirect('homePage')
     else:
         upload_form = UploadForm()
         comment_form = CommentForm()
+
     context ={
         'posts':posts,
-        'form':upload_form,
-        'cform': comment_form,
+        'upload_form':upload_form,
+        'comment_form': comment_form,
         'user':current_profile,
     }
-    return render (request, 'index.html',locals())
+    return render (request, 'index.html',context)
 
-@login_required(login_url='/accounts/login/')
+
 def profile(request):
     current_user = request.user
     current_profile = Profile.objects.get(user=request.user)
